@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ECO SCAN</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
+</head>
+
+<body>
+
+<h1>♻️ ECO SCAN</h1>
+
+<p>Asistente inteligente para la clasificación de residuos</p>
+
+<video id="video" autoplay playsinline></video>
+
+<div id="resultado">
+
+<h2>Esperando cámara...</h2>
+
+</div>
+
+<br>
+
+<button onclick="mostrarPilas()">
+🔋 Información sobre pilas y baterías
+</button>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
