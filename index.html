@@ -3,40 +3,141 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>ECO SCAN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>ECO SCAN</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <!-- TensorFlow -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+    <!-- Modelo COCO SSD -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 
 </head>
 
 <body>
 
-<h1>♻️ ECO SCAN</h1>
+    <h1>♻️ ECO SCAN</h1>
 
-<p>Asistente inteligente para la clasificación de residuos</p>
+    <h3>Asistente inteligente para la clasificación de residuos</h3>
 
-<video id="video" autoplay playsinline></video>
+    <video
+        id="video"
+        autoplay
+        playsinline>
+    </video>
 
-<div id="resultado">
+    <br><br>
 
-<h2>Esperando cámara...</h2>
+    <!-- ============================ -->
+    <!-- BOTONES -->
+    <!-- ============================ -->
 
-</div>
+    <div class="contenedorBotones">
 
-<br>
+        <h2>♻️ Residuos Aprovechables</h2>
 
-<button onclick="mostrarPilas()">
-🔋 Información sobre pilas y baterías
-</button>
+        <button onclick="mostrarResiduo('bottle')">
+            🧴 Botella plástica
+        </button>
 
-<script src="script.js"></script>
+        <button onclick="mostrarResiduo('book')">
+            📚 Libro / Cuaderno
+        </button>
+
+        <button onclick="mostrarResiduo('cup')">
+            🥤 Vaso
+        </button>
+
+        <button onclick="mostrarCarton()">
+            📦 Cartón
+        </button>
+
+        <button onclick="mostrarHojas()">
+            📄 Hojas de papel
+        </button>
+
+        <button onclick="mostrarEmpaques()">
+            🥡 Empaques
+        </button>
+
+        <hr>
+
+        <h2>🍃 Residuos Orgánicos</h2>
+
+        <button onclick="mostrarResiduo('banana')">
+            🍌 Banano
+        </button>
+
+        <button onclick="mostrarResiduo('apple')">
+            🍎 Manzana
+        </button>
+
+        <button onclick="mostrarResiduo('orange')">
+            🍊 Naranja
+        </button>
+
+        <hr>
+
+        <h2>📱 Residuos Electrónicos</h2>
+
+        <button onclick="mostrarResiduo('cell phone')">
+            📱 Celular
+        </button>
+
+        <button onclick="mostrarResiduo('mouse')">
+            🖱️ Mouse
+        </button>
+
+        <button onclick="mostrarResiduo('remote')">
+            🎮 Control remoto
+        </button>
+
+        <hr>
+
+        <h2>🔋 Residuos Especiales</h2>
+
+        <button onclick="mostrarPilas()">
+            🔋 Pilas y baterías
+        </button>
+
+    </div>
+
+    <br>
+
+    <!-- ============================ -->
+    <!-- RESULTADO -->
+    <!-- ============================ -->
+
+    <div id="resultado">
+
+        <h2>📷 Esperando que la cámara detecte un residuo...</h2>
+
+        <p>
+            También puedes seleccionar un residuo utilizando los botones.
+        </p>
+
+    </div>
+
+    <br>
+
+    <footer>
+
+        <p>
+
+            <strong>ECO SCAN</strong><br>
+
+            Prototipo didáctico con Inteligencia Artificial para la clasificación de residuos sólidos.
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
 
 </body>
 
