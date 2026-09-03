@@ -231,3 +231,54 @@ RESPONSIVE
     }
 
 }
+/* ==========================================
+CÁMARA E INFORMACIÓN JUNTAS
+========================================== */
+
+.principal{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+max-width:1100px;
+margin:20px auto;
+align-items:start;
+}
+
+.camara video{
+width:100%;
+border-radius:18px;
+border:6px solid #2e7d32;
+}
+
+.resultado{
+background:white;
+border-radius:18px;
+padding:20px;
+min-height:340px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+text-align:left;
+}
+
+.resultado h2{
+text-align:center;
+color:#1b5e20;
+}
+
+.resultado p{
+font-size:17px;
+line-height:1.6;
+}
+
+/* CELULAR */
+
+@media(max-width:768px){
+
+.principal{
+grid-template-columns:1fr;
+}
+
+.resultado{
+min-height:auto;
+}
+
+}
