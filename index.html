@@ -1,174 +1,153 @@
-/* ==========================================
-   ECO SCAN - STYLE.CSS COMPLETO
-========================================== */
+<!DOCTYPE html>
+<html lang="es">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+<head>
 
-body{
-    background:#e8f5e9;
-    text-align:center;
-    padding:20px;
-}
+    <meta charset="UTF-8">
 
-/* TÍTULOS */
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-h1{
-    color:#1b5e20;
-    font-size:42px;
-    margin-bottom:8px;
-}
+    <title>ECO SCAN</title>
 
-h3{
-    color:#555;
-    margin-bottom:20px;
-}
+    <link rel="stylesheet" href="style.css">
 
-/* ==========================================
-   CÁMARA + INFORMACIÓN
-========================================== */
+    <!-- TensorFlow -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
-.principal{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    max-width:1100px;
-    margin:0 auto 25px;
-    align-items:start;
-}
+    <!-- Modelo COCO SSD -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 
-.camara{
-    display:flex;
-    flex-direction:column;
-}
+</head>
 
-#video{
-    width:100%;
-    border-radius:20px;
-    border:6px solid #2e7d32;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
-}
+<body>
 
-.resultado{
-    background:white;
-    border-radius:20px;
-    padding:20px;
-    min-height:330px;
-    box-shadow:0 5px 15px rgba(0,0,0,.20);
-    text-align:left;
-}
+    <h1>♻️ ECO SCAN</h1>
 
-.resultado h2{
-    color:#1b5e20;
-    text-align:center;
-    margin-bottom:15px;
-}
+    <h3>Asistente inteligente para la clasificación de residuos</h3>
 
-.resultado p{
-    font-size:17px;
-    line-height:1.6;
-    margin-bottom:10px;
-}
+   <!-- CÁMARA + INFORMACIÓN -->
+<div class="principal">
 
-/* BOTÓN NUEVO RESIDUO */
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="camara">
 
-.nuevoResiduo{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#1565c0;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
+        <video id="video" autoplay playsinline></video>
 
-.nuevoResiduo:hover{
-    background:#0d47a1;
-}
+        <button class="nuevoResiduo" onclick="reconocerNuevoResiduo()">
+            🔄 Reconocer nuevo residuo
+        </button>
 
-/* ==========================================
-   BOTONES DE RESIDUOS
-========================================== */
+    </div>
 
-.contenedorBotones{
-    max-width:1100px;
-    margin:auto;
-}
+    <!-- COLUMNA DERECHA -->
+    <div id="resultado" class="resultado">
 
-.contenedorBotones h2{
-    color:#2e7d32;
-    margin:18px 0 10px;
-}
+        <h2>📷 Esperando que la cámara detecte un residuo...</h2>
 
-button{
-    background:#43a047;
-    color:white;
-    border:none;
-    border-radius:12px;
-    padding:14px;
-    margin:6px;
-    font-size:16px;
-    cursor:pointer;
-    transition:.3s;
-    min-width:180px;
-    box-shadow:0 3px 8px rgba(0,0,0,.18);
-}
+        <p>También puedes seleccionar un residuo utilizando los botones.</p>
 
-button:hover{
-    background:#1b5e20;
-    transform:scale(1.05);
-}
+    </div>
 
-button:active{
-    transform:scale(.97);
-}
+</div>
 
-/* LÍNEA */
+<br>
 
-hr{
-    margin:20px auto;
-    width:90%;
-    border:none;
-    border-top:2px solid #a5d6a7;
-}
+    <!-- ============================ -->
+    <!-- BOTONES -->
+    <!-- ============================ -->
 
-/* FOOTER */
+    <div class="contenedorBotones">
 
-footer{
-    margin-top:25px;
-    color:#555;
-    font-size:15px;
-}
+        <h2>♻️ Residuos Aprovechables</h2>
 
-/* ==========================================
-   CELULAR
-========================================== */
+        <button onclick="mostrarResiduo('bottle')">
+            🧴 Botella plástica
+        </button>
 
-@media (max-width:768px){
+        <button onclick="mostrarResiduo('book')">
+            📚 Libro / Cuaderno
+        </button>
 
-    h1{
-        font-size:32px;
-    }
+        <button onclick="mostrarResiduo('cup')">
+            🥤 Vaso
+        </button>
 
-    .principal{
-        grid-template-columns:1fr;
-    }
+        <button onclick="mostrarCarton()">
+            📦 Cartón
+        </button>
 
-    .resultado{
-        min-height:auto;
-    }
+        <button onclick="mostrarHojas()">
+            📄 Hojas de papel
+        </button>
 
-    button{
-        width:95%;
-        min-width:auto;
-    }
+        <button onclick="mostrarEmpaques()">
+            🥡 Empaques
+        </button>
 
-}
+        <hr>
+
+        <h2>🍃 Residuos Orgánicos</h2>
+
+        <button onclick="mostrarResiduo('banana')">
+            🍌 Banano
+        </button>
+
+        <button onclick="mostrarResiduo('apple')">
+            🍎 Manzana
+        </button>
+
+        <button onclick="mostrarResiduo('orange')">
+            🍊 Naranja
+        </button>
+
+        <hr>
+
+        <h2>📱 Residuos Electrónicos</h2>
+
+        <button onclick="mostrarResiduo('cell phone')">
+            📱 Celular
+        </button>
+
+        <button onclick="mostrarResiduo('mouse')">
+            🖱️ Mouse
+        </button>
+
+        <button onclick="mostrarResiduo('remote')">
+            🎮 Control remoto
+        </button>
+
+        <hr>
+
+        <h2>🔋 Residuos Especiales</h2>
+
+        <button onclick="mostrarPilas()">
+            🔋 Pilas y baterías
+        </button>
+
+    </div>
+
+    <br>
+
+    <!-- ============================ -->
+    <!-- RESULTADO -->
+    <!-- ============================ -->
+
+    <br>
+
+    <footer>
+
+        <p>
+
+            <strong>ECO SCAN</strong><br>
+
+            Prototipo didáctico con Inteligencia Artificial para la clasificación de residuos sólidos.
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
