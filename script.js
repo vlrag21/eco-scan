@@ -360,6 +360,43 @@ function mostrarEmpaques(){
 
     );
 
+}
+// =====================================
+// MENSAJES DE AYUDA
+// =====================================
+
+function mostrarAyuda(tipo, objeto = ""){
+
+    if(tipo === "noDetectado"){
+
+        resultado.innerHTML = `
+        <h2>🔍 No se detectó ningún residuo</h2>
+
+        <p><strong>¿Qué puedes hacer?</strong></p>
+
+        <p>• Acerca el residuo a la cámara.</p>
+        <p>• Mejora la iluminación.</p>
+        <p>• Si no es reconocido, utiliza los <strong>botones de ayuda</strong> que aparecen debajo para conocer su correcta clasificación.</p>
+        `;
+
+    }
+
+    if(tipo === "sinInformacion"){
+
+        resultado.innerHTML = `
+        <h2>📷 Residuo reconocido</h2>
+
+        <p>La inteligencia artificial identificó el objeto como:</p>
+
+        <h3>${objeto}</h3>
+
+        <p>Este residuo aún no tiene información registrada en ECO SCAN.</p>
+
+        <p>👉 Utiliza los <strong>botones de ayuda</strong> para consultar el residuo más parecido y conocer cómo clasificarlo correctamente.</p>
+        `;
+
+    }
+
 }// ======================================================
 // PARTE 3
 // CÁMARA E INTELIGENCIA ARTIFICIAL
@@ -441,29 +478,41 @@ async function detectarObjeto(modelo){
 
     setInterval(async()=>{
 
+        if(!reconocimientoActivo || residuoBloqueado){
+            return;
+        }
+
         const predicciones = await modelo.detect(video);
 
-        if(predicciones.length==0){
-
+        if(predicciones.length===0){
             return;
-
         }
 
         const objeto = predicciones[0].class;
 
         if(residuos[objeto]){
 
-            if(objeto!=ultimoObjeto){
+            ultimoObjeto = objeto;
 
-                ultimoObjeto=objeto;
+            mostrarResiduo(objeto);
 
-                mostrarResiduo(objeto);
+            // Se bloquea hasta que el usuario pulse el botón
+            residuoBloqueado = true;
+            reconocimientoActivo = false;
 
-            }
+        }else{
+
+            resultado.innerHTML = `
+                <h2>🔍 No se detectó el objeto</h2>
+                <p>Utiliza los <strong>botones de ayuda</strong> para conocer su correcta clasificación.</p>
+            `;
+
+            residuoBloqueado = true;
+            reconocimientoActivo = false;
 
         }
 
-    },1500);
+    },1000);
 
 }// ======================================================
 // PARTE 4
@@ -472,31 +521,6 @@ async function detectarObjeto(modelo){
 
 // Iniciar la Inteligencia Artificial
 iniciarIA();
-
-// ======================================================
-// MENSAJE CUANDO EL OBJETO NO ESTÁ REGISTRADO
-// ======================================================
-
-function objetoNoRegistrado(nombreObjeto){
-
-    resultado.innerHTML = `
-
-    <h2>⚠️ Objeto detectado</h2>
-
-    <p><strong>${nombreObjeto}</strong></p>
-
-    <p>
-    Este objeto fue reconocido por la Inteligencia Artificial,
-    pero ECO SCAN todavía no tiene información registrada sobre él.
-    </p>
-
-    <p>
-    Puedes agregar este residuo en futuras versiones del proyecto.
-    </p>
-
-    `;
-
-}
 
 // ======================================================
 // MEJORAR LA DETECCIÓN
@@ -537,11 +561,25 @@ async function detectarObjeto(modelo){
                 ultimoObjeto = objeto;
 
                 objetoNoRegistrado(objeto);
+                let reconocimientoActivo = true;
+let residuoBloqueado = false;
 
             }
 
         }
 
     },1500);
+
+}
+function reconocerNuevoResiduo(){
+
+    residuoBloqueado = false;
+    ultimoObjeto = "";
+    reconocimientoActivo = true;
+
+    resultado.innerHTML = `
+        <h2>📷 Esperando un nuevo residuo...</h2>
+        <p>Apunta la cámara hacia el siguiente objeto.</p>
+    `;
 
 }
