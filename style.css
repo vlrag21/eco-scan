@@ -1,6 +1,5 @@
 /* ==========================================
-   ECO SCAN
-   ESTILOS
+   ECO SCAN - STYLE.CSS COMPLETO
 ========================================== */
 
 *{
@@ -11,274 +10,165 @@
 }
 
 body{
-
     background:#e8f5e9;
-
     text-align:center;
-
     padding:20px;
-
 }
 
-/* ==========================
-TÍTULO
-========================== */
+/* TÍTULOS */
 
 h1{
-
     color:#1b5e20;
-
-    font-size:45px;
-
-    margin-bottom:10px;
-
-}
-
-h2{
-
-    color:#2e7d32;
-
-    margin-top:25px;
-
-    margin-bottom:15px;
-
+    font-size:42px;
+    margin-bottom:8px;
 }
 
 h3{
-
-    color:#444;
-
-    margin-bottom:25px;
-
-}
-
-/* ==========================
-VIDEO
-========================== */
-
-video{
-
-    width:90%;
-
-    max-width:650px;
-
-    border-radius:20px;
-
-    border:6px solid #2e7d32;
-
-    box-shadow:0px 5px 15px rgba(0,0,0,.25);
-
-}
-
-/* ==========================
-BOTONES
-========================== */
-
-.contenedorBotones{
-
-    margin-top:30px;
-
-}
-
-button{
-
-    background:#43a047;
-
-    color:white;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    margin:8px;
-
-    font-size:17px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    min-width:180px;
-
-    box-shadow:0px 4px 10px rgba(0,0,0,.2);
-
-}
-
-button:hover{
-
-    background:#1b5e20;
-
-    transform:scale(1.05);
-
-}
-
-button:active{
-
-    transform:scale(.95);
-
-}
-
-/* ==========================
-RESULTADO
-========================== */
-
-#resultado{
-
-    background:white;
-
-    width:90%;
-
-    max-width:900px;
-
-    margin:30px auto;
-
-    padding:25px;
-
-    border-radius:20px;
-
-    box-shadow:0px 5px 15px rgba(0,0,0,.2);
-
-    text-align:left;
-
-}
-
-#resultado h2{
-
-    text-align:center;
-
-    color:#1b5e20;
-
-}
-
-#resultado p{
-
-    font-size:18px;
-
-    margin-top:15px;
-
-    line-height:1.7;
-
-}
-
-/* ==========================
-SEPARADORES
-========================== */
-
-hr{
-
-    margin:30px auto;
-
-    width:90%;
-
-    border:none;
-
-    border-top:2px solid #81c784;
-
-}
-
-/* ==========================
-FOOTER
-========================== */
-
-footer{
-
-    margin-top:35px;
-
     color:#555;
-
-    font-size:16px;
-
+    margin-bottom:20px;
 }
 
-/* ==========================
-RESPONSIVE
-========================== */
-
-@media(max-width:768px){
-
-    h1{
-
-        font-size:34px;
-
-    }
-
-    h2{
-
-        font-size:22px;
-
-    }
-
-    button{
-
-        width:95%;
-
-        font-size:18px;
-
-    }
-
-    video{
-
-        width:100%;
-
-    }
-
-    #resultado{
-
-        width:100%;
-
-    }
-
-}
 /* ==========================================
-CÁMARA E INFORMACIÓN JUNTAS
+   CÁMARA + INFORMACIÓN
 ========================================== */
 
 .principal{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-max-width:1100px;
-margin:20px auto;
-align-items:start;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    max-width:1100px;
+    margin:0 auto 25px;
+    align-items:start;
 }
 
-.camara video{
-width:100%;
-border-radius:18px;
-border:6px solid #2e7d32;
+.camara{
+    display:flex;
+    flex-direction:column;
+}
+
+#video{
+    width:100%;
+    border-radius:20px;
+    border:6px solid #2e7d32;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
 .resultado{
-background:white;
-border-radius:18px;
-padding:20px;
-min-height:340px;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-text-align:left;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    min-height:330px;
+    box-shadow:0 5px 15px rgba(0,0,0,.20);
+    text-align:left;
 }
 
 .resultado h2{
-text-align:center;
-color:#1b5e20;
+    color:#1b5e20;
+    text-align:center;
+    margin-bottom:15px;
 }
 
 .resultado p{
-font-size:17px;
-line-height:1.6;
+    font-size:17px;
+    line-height:1.6;
+    margin-bottom:10px;
 }
 
-/* CELULAR */
+/* BOTÓN NUEVO RESIDUO */
 
-@media(max-width:768px){
-
-.principal{
-grid-template-columns:1fr;
+.nuevoResiduo{
+    width:100%;
+    margin-top:12px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#1565c0;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.resultado{
-min-height:auto;
+.nuevoResiduo:hover{
+    background:#0d47a1;
 }
+
+/* ==========================================
+   BOTONES DE RESIDUOS
+========================================== */
+
+.contenedorBotones{
+    max-width:1100px;
+    margin:auto;
+}
+
+.contenedorBotones h2{
+    color:#2e7d32;
+    margin:18px 0 10px;
+}
+
+button{
+    background:#43a047;
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    margin:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+    min-width:180px;
+    box-shadow:0 3px 8px rgba(0,0,0,.18);
+}
+
+button:hover{
+    background:#1b5e20;
+    transform:scale(1.05);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+/* LÍNEA */
+
+hr{
+    margin:20px auto;
+    width:90%;
+    border:none;
+    border-top:2px solid #a5d6a7;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:25px;
+    color:#555;
+    font-size:15px;
+}
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width:768px){
+
+    h1{
+        font-size:32px;
+    }
+
+    .principal{
+        grid-template-columns:1fr;
+    }
+
+    .resultado{
+        min-height:auto;
+    }
+
+    button{
+        width:95%;
+        min-width:auto;
+    }
 
 }
